@@ -11,7 +11,7 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "E-Commerce Platform",
+      title: "Gen AI smart Assistant",
       description:
         "A full-featured online store with product listings, cart functionality, and secure checkout process.",
       image: "/placeholder.svg?height=400&width=600",
