@@ -41,7 +41,7 @@ export default function Skills() {
         { name: "Linux", icon: <Terminal className="w-6 h-6" /> },
         { name: "Windows", icon: <Monitor className="w-6 h-6" /> },
         { name: "Unix", icon: <Terminal className="w-6 h-6" /> },
-        { name: "macOS", icon: <Monitor className="w-6 h-6" /> },
+        // { name: "macOS", icon: <Monitor className="w-6 h-6" /> },
         { name: "Shell Scripting", icon: <Terminal className="w-6 h-6" /> },
       ],
     },
@@ -54,8 +54,8 @@ export default function Skills() {
         { name: "DNS", icon: <Globe className="w-6 h-6" /> },
         { name: "HTTP/HTTPS", icon: <Lock className="w-6 h-6" /> },
         { name: "Routing", icon: <Wifi className="w-6 h-6" /> },
-        { name: "Network Security", icon: <Shield className="w-6 h-6" /> },
-        { name: "Firewalls", icon: <Shield className="w-6 h-6" /> },
+        // { name: "Network Security", icon: <Shield className="w-6 h-6" /> },
+        // { name: "Firewalls", icon: <Shield className="w-6 h-6" /> },
       ],
     },
     {
@@ -66,9 +66,9 @@ export default function Skills() {
         { name: "AWS", icon: <Cloud className="w-6 h-6" /> },
         { name: "Azure", icon: <Cloud className="w-6 h-6" /> },
         { name: "Docker", icon: <Layers className="w-6 h-6" /> },
-        { name: "Kubernetes", icon: <Layers className="w-6 h-6" /> },
-        { name: "VMware", icon: <Server className="w-6 h-6" /> },
-        { name: "Terraform", icon: <Settings className="w-6 h-6" /> },
+        // { name: "Kubernetes", icon: <Layers className="w-6 h-6" /> },
+        // { name: "VMware", icon: <Server className="w-6 h-6" /> },
+        // { name: "Terraform", icon: <Settings className="w-6 h-6" /> },
       ],
     },
     {
@@ -83,7 +83,7 @@ export default function Skills() {
         { name: "Node.js", icon: <Server className="w-6 h-6" /> },
         { name: "Express", icon: <Server className="w-6 h-6" /> },
         { name: "MongoDB", icon: <Database className="w-6 h-6" /> },
-        { name: "RESTful APIs", icon: <Workflow className="w-6 h-6" /> },
+        // { name: "RESTful APIs", icon: <Workflow className="w-6 h-6" /> },
       ],
     },
     {
@@ -101,17 +101,17 @@ export default function Skills() {
         { name: "Algorithms", icon: <Workflow className="w-6 h-6" /> },
       ],
     },
-    {
-      id: "mobile",
-      name: "Mobile Development",
-      icon: <Smartphone className="w-8 h-8" />,
-      skills: [
-        { name: "React Native", icon: <Smartphone className="w-6 h-6" /> },
-        { name: "Flutter", icon: <Smartphone className="w-6 h-6" /> },
-        { name: "Android", icon: <Smartphone className="w-6 h-6" /> },
-        { name: "iOS", icon: <Smartphone className="w-6 h-6" /> },
-      ],
-    },
+    // {
+    //   id: "mobile",
+    //   name: "Mobile Development",
+    //   icon: <Smartphone className="w-8 h-8" />,
+    //   skills: [
+    //     { name: "React Native", icon: <Smartphone className="w-6 h-6" /> },
+    //     { name: "Flutter", icon: <Smartphone className="w-6 h-6" /> },
+    //     { name: "Android", icon: <Smartphone className="w-6 h-6" /> },
+    //     { name: "iOS", icon: <Smartphone className="w-6 h-6" /> },
+    //   ],
+    // },
   ]
 
   const containerVariants = {
