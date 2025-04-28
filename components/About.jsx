@@ -95,7 +95,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-teal-600 dark:bg-teal-400 rounded-full mr-2"></div>
                   <span className="font-medium text-gray-900 dark:text-white">Name:</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 pl-4">Your Name</p>
+                <p className="text-gray-700 dark:text-gray-300 pl-4">Nachiket Jayant Deshpande</p>
               </div>
 
               <div className="space-y-1">
@@ -103,7 +103,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-teal-600 dark:bg-teal-400 rounded-full mr-2"></div>
                   <span className="font-medium text-gray-900 dark:text-white">Email:</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 pl-4">your.email@example.com</p>
+                <p className="text-gray-700 dark:text-gray-300 pl-4">nachiet.j.deshpande@gmail.com</p>
               </div>
 
               <div className="space-y-1">
@@ -111,7 +111,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-teal-600 dark:bg-teal-400 rounded-full mr-2"></div>
                   <span className="font-medium text-gray-900 dark:text-white">Location:</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 pl-4">San Francisco, CA</p>
+                <p className="text-gray-700 dark:text-gray-300 pl-4">Nagpur</p>
               </div>
 
               <div className="space-y-1">
@@ -119,7 +119,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-teal-600 dark:bg-teal-400 rounded-full mr-2"></div>
                   <span className="font-medium text-gray-900 dark:text-white">Availability:</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 pl-4">Available for freelance</p>
+                <p className="text-gray-700 dark:text-gray-300 pl-4">Happy to freelance/Internship/Exploration</p>
               </div>
             </div>
 
