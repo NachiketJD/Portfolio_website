@@ -118,7 +118,7 @@ export default function Hero() {
                 {/* Placeholder for your photo */}
                 <div className="text-gray-500 dark:text-gray-400 text-center p-8">
                   <div className="text-6xl mb-4">📷</div>
-                  <p>Your photo will be placed here</p>
+                  {/* <p>Your photo will be placed here</p> */}
                 </div>
               </div>
             </div>
