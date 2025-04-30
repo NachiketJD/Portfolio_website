@@ -17,7 +17,7 @@ export default function Internships() {
       location: "Nagpur",
       description:
         "Assessed industry-specific challenges in Legal, Finance, Manufacturing, Education, and Pharma, providing AI-driven insights to optimize workflows and decision-making. Consulted with professionals at VCMDWA, analyzing business requirements and recommending tailored AI solutions, reinforcing expertise in AI Consulting and Industry Applications.Presented cutting-edge AI tools and innovations at Comp-Ex 2025, enhancing AI awareness and engaging with IT professionals, AI engineers, and industry leaders on emerging AI trends",
-      skills: ["AI", "Consulting", "React", "Git", "Product Management"],
+      skills: ["AI", "Consulting", "React", "Git", "Product Management", "Technical Documentation"],
     },
     {
       company: "Digital Solutions Ltd.",
@@ -29,13 +29,13 @@ export default function Internships() {
       skills: ["Node.js", "Express", "React", "MongoDB"],
     },
     {
-      company: "Creative Web Agency",
-      position: "UI/UX Design Intern",
-      period: "May 2022 - Aug 2022",
-      location: "New York, NY",
+      company: "Rainbow Software Solutions",
+      position: "Web Development Intern",
+      period: "May 2024 - June 2024",
+      location: "Nagpur",
       description:
-        "Created wireframes and prototypes for web and mobile applications. Conducted user research and usability testing. Collaborated with developers to ensure design implementation accuracy.",
-      skills: ["Figma", "Adobe XD", "Sketch", "User Research"],
+        "Developed a custom CRM using the MERN stack and Material UI, integrating modules for Accounts, Vendors, Staff, and Expenses. Automated Invoices and Deposits via a Node.js backend to streamline cash flow. Integrated Email.js and Twilio for dynamic email templates, enhancing communication efficiency.",
+      skills: ["React", "CSS ", "MERN"],
     },
   ]
 
