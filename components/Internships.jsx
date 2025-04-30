@@ -11,13 +11,13 @@ export default function Internships() {
 
   const internships = [
     {
-      company: "Tech Innovators Inc.",
-      position: "Frontend Developer Intern",
-      period: "Jun 2023 - Aug 2023",
-      location: "San Francisco, CA",
+      company: "Compex-25 VCMDWA",
+      position: "Technical Consulting Intern",
+      period: "Nov 2024 - Jan 2025",
+      location: "Nagpur",
       description:
-        "Developed and maintained responsive web applications using React.js. Collaborated with the design team to implement UI/UX improvements. Participated in code reviews and team meetings.",
-      skills: ["React", "JavaScript", "CSS", "Git"],
+        "Assessed industry-specific challenges in Legal, Finance, Manufacturing, Education, and Pharma, providing AI-driven insights to optimize workflows and decision-making. Consulted with professionals at VCMDWA, analyzing business requirements and recommending tailored AI solutions, reinforcing expertise in AI Consulting and Industry Applications.Presented cutting-edge AI tools and innovations at Comp-Ex 2025, enhancing AI awareness and engaging with IT professionals, AI engineers, and industry leaders on emerging AI trends",
+      skills: ["AI", "Consulting", "React", "Git", "Product Management"],
     },
     {
       company: "Digital Solutions Ltd.",
