@@ -20,7 +20,7 @@ export default function Projects() {
       githubLink: "#",
     },
     {
-      title: "Task Management App",
+      title: "Deshpande DNS",
       description: "A productivity application that helps users organize tasks, set deadlines, and track progress.",
       image: "/placeholder.svg?height=400&width=600",
       tags: ["React", "Firebase", "Tailwind CSS"],
