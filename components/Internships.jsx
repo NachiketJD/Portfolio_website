@@ -20,8 +20,8 @@ export default function Internships() {
       skills: ["AI", "Consulting", "React", "Git", "Product Management", "Technical Documentation"],
     },
     {
-      company: "Digital Solutions Ltd.",
-      position: "Full Stack Developer Intern",
+      company: "Vruksh Ecosystem",
+      position: "",
       period: "Jan 2023 - Apr 2023",
       location: "Remote",
       description:
