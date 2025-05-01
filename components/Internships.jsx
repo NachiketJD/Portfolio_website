@@ -22,7 +22,7 @@ export default function Internships() {
     {
       company: "Vruksh Ecosystem",
       position: "Business Technology Analyst",
-      period: "July 2024 - Apr 2023",
+      period: "July 2024 - Jan 2025",
       location: "Remote",
       description:
         "Built RESTful APIs using Node.js and Express. Implemented frontend features with React. Worked with MongoDB for data storage and retrieval. Participated in agile development processes.",
