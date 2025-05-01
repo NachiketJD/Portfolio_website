@@ -25,7 +25,7 @@ export default function Internships() {
       period: "July 2024 - Jan 2025",
       location: "Remote",
       description:
-        "Built RESTful APIs using Node.js and Express. Implemented frontend features with React. Worked with MongoDB for data storage and retrieval. Participated in agile development processes.",
+        "Spearheaded the development of AI-driven solutions, integrating Novel.sh and OpenWebUI to streamline presentations, documentation, and spreadsheet management. Engineered a cutting-edge Next.js SaaS dashboard, optimizing user experience and functionality.",
       skills: ["Node.js", "Express", "React", "MongoDB"],
     },
     {
