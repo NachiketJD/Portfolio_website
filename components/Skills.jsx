@@ -64,7 +64,7 @@ export default function Skills() {
       icon: <Cloud className="w-8 h-8" />,
       skills: [
         { name: "AWS", icon: <Cloud className="w-6 h-6" /> },
-        { name: "Azure", icon: <Cloud className="w-6 h-6" /> },
+        // { name: "Azure", icon: <Cloud className="w-6 h-6" /> },
         { name: "Docker", icon: <Layers className="w-6 h-6" /> },
         // { name: "Kubernetes", icon: <Layers className="w-6 h-6" /> },
         // { name: "VMware", icon: <Server className="w-6 h-6" /> },
