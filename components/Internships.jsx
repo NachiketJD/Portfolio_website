@@ -21,7 +21,7 @@ export default function Internships() {
     },
     {
       company: "Vruksh Ecosystem",
-      position: "",
+      position: "Business Technology Analyst",
       period: "Jan 2023 - Apr 2023",
       location: "Remote",
       description:
