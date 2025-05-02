@@ -26,7 +26,7 @@ export default function Internships() {
       location: "Remote",
       description:
         "Spearheaded the development of AI-driven solutions, integrating Novel.sh and OpenWebUI to streamline presentations, documentation, and spreadsheet management. Engineered a cutting-edge Next.js SaaS dashboard, optimizing user experience and functionality.",
-      skills: ["Node.js", "Express", "React", "MongoDB"],
+      skills: ["Node.js", "Express", "React", "MongoDB"," Novel.sh"],
     },
     {
       company: "Rainbow Software Solutions",
