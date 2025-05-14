@@ -94,6 +94,7 @@ export default function Skills() {
        
         { name: "C/C++", icon: <Terminal className="w-6 h-6" /> },
         { name: "Python", icon: <Terminal className="w-6 h-6" /> },
+        { name: "Golang", icon: <Terminal className="w-6 h-6" /> },
         { name: "SQL(Oracle)", icon: <Terminal className="w-6 h-6" /> },
         { name: "Java", icon: <Cpu className="w-6 h-6" /> },
         { name: "Git", icon: <GitBranch className="w-6 h-6" /> },
