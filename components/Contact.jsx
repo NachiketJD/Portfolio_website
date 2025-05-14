@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react"
+import emailjs from "emailjs-com";
 
 export default function Contact() {
   const ref = useRef(null)
@@ -24,30 +25,42 @@ export default function Contact() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+   e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      // Here you would integrate with EmailJS or another email service
-      // For demonstration, we'll simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+  const SERVICE_ID = "your_service_id";
+  const TEMPLATE_ID = "your_template_id";
+  const PUBLIC_KEY = "your_public_key"; // usually starts with "user_"
 
-      setSubmitStatus({
-        success: true,
-        message: "Your message has been sent successfully!",
-      })
-      setFormData({ name: "", email: "", subject: "", message: "" })
+  try {
+    const result = await emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      PUBLIC_KEY
+    );
 
-      // Reset status after 5 seconds
-      setTimeout(() => setSubmitStatus(null), 5000)
-    } catch (error) {
-      setSubmitStatus({
-        success: false,
-        message: "There was an error sending your message. Please try again.",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
+    setSubmitStatus({
+      success: true,
+      message: "Your message has been sent successfully!",
+    });
+    setFormData({ name: "", email: "", subject: "", message: "" });
+
+    // Reset status after 5 seconds
+    setTimeout(() => setSubmitStatus(null), 5000);
+  } catch (error) {
+    setSubmitStatus({
+      success: false,
+      message: "There was an error sending your message. Please try again.",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
   }
 
   const containerVariants = {

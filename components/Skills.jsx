@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useState, useRef } from "react"
-import emailjs from "emailjs-com";
 import {
   Server,
   Globe,
