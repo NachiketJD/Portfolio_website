@@ -86,7 +86,7 @@ export default function About() {
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               I specialize in front-end development with React, but I'm also comfortable working across the full stack.
               I believe in writing clean, maintainable code and creating intuitive interfaces that users love to
-              interact with. I am also interested in Computer.
+              interact with. I am also interested in Computer Networks,
             </p>
 
             <div className="grid grid-cols-2 gap-4 my-8">
