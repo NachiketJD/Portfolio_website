@@ -137,10 +137,13 @@ export default function Skills() {
   }
 
   // Filter skills based on active category
-  const filteredSkills =
-    activeCategory === "all"
-      ? skillCategories.slice(1).flatMap((category) => category.skills)
-      : skillCategories.find((cat) => cat.id === activeCategory)?.skills || []
+const filteredSkills =
+  activeCategory === "all"
+    ? skillCategories
+        .filter(cat => cat.skills) // jisme skills defined hain
+        .flatMap((category) => category.skills)
+    : skillCategories.find((cat) => cat.id === activeCategory)?.skills || []
+
 
   return (
     <section id="skills" className="py-24">
