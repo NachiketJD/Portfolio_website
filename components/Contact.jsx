@@ -180,7 +180,7 @@ export default function Contact() {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://github.com/NachiketJD"
                     className="bg-gray-200 dark:bg-gray-700 p-3 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
                     aria-label="GitHub"
                   >
