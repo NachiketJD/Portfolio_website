@@ -128,7 +128,7 @@ export default function Contact() {
                   <div>
                     <h4 className="font-medium text-gray-800 dark:text-white">Email</h4>
                     <a
-                      href="mailto:your.email@example.com"
+                      href="mailto:nachiket.j.deshpande@gmail.com"
                       className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                     >
                       nachiket.j.deshpande@gmail.com
