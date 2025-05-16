@@ -91,7 +91,6 @@ export default function Skills() {
       name: "Software Development",
       icon: <Terminal className="w-8 h-8" />,
       skills: [
-       
         { name: "C/C++", icon: <Terminal className="w-6 h-6" /> },
         { name: "Python", icon: <Terminal className="w-6 h-6" /> },
         { name: "Golang", icon: <Terminal className="w-6 h-6" /> },
@@ -137,13 +136,12 @@ export default function Skills() {
   }
 
   // Filter skills based on active category
-const filteredSkills =
-  activeCategory === "all"
-    ? skillCategories
-        .filter(cat => cat.skills) // jisme skills defined hain
-        .flatMap((category) => category.skills)
-    : skillCategories.find((cat) => cat.id === activeCategory)?.skills || []
-
+  const filteredSkills =
+    activeCategory === "all"
+      ? skillCategories
+          .filter((cat) => cat.skills)
+          .flatMap((category) => category.skills)
+      : skillCategories.find((cat) => cat.id === activeCategory)?.skills || []
 
   return (
     <section id="skills" className="py-24">
@@ -169,14 +167,14 @@ const filteredSkills =
         </motion.div>
 
         {/* Skill Category Tabs */}
-        <div className="skill-tabs mb-12">
+        <div className="skill-tabs mb-12 flex flex-wrap justify-center gap-4">
           {skillCategories.map((category) => (
             <motion.div
               key={category.id}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`skill-tab flex items-center gap-2 ${
+              className={`skill-tab flex items-center gap-2 cursor-pointer px-4 py-2 rounded-md ${
                 activeCategory === category.id
                   ? "bg-gradient-to-r from-teal-600 to-amber-500 text-white"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -201,48 +199,34 @@ const filteredSkills =
               {skillCategories.find((cat) => cat.id === activeCategory)?.name}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {activeCategory === "os" && "Experience with various operating systems and system administration."}
-              {activeCategory === "networks" && "Knowledge of network protocols, architecture, and security."}
+              {activeCategory === "os" &&
+                "Experience with various operating systems and system administration."}
+              {activeCategory === "networks" &&
+                "Knowledge of network protocols, architecture, and security."}
               {activeCategory === "cloud" &&
                 "Expertise in cloud platforms, containerization, and infrastructure as code."}
               {activeCategory === "web" && "Full-stack web development skills from frontend to backend."}
-              {activeCategory === "sde" && "Core software development skills, languages, and best practices."}
+              {activeCategory === "sde" &&
+                "Core software development skills, languages, and best practices."}
               {activeCategory === "mobile" && "Mobile application development for different platforms."}
             </p>
           </motion.div>
         )}
 
         {/* Hexagon Skill Grid */}
-        <motion.div variants={containerVariants} className="hexagon-container">
+        <motion.div variants={containerVariants} className="hexagon-container flex flex-wrap justify-center gap-6">
           {filteredSkills.map((skill, index) => (
             <motion.div
               key={`${activeCategory}-${skill.name}-${index}`}
               variants={itemVariants}
-              whileHover={{ scale: 1.05, rotate: 10 }}
-              className="hexagon-item"
+              className="hexagon flex flex-col items-center justify-center bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 w-36 h-36 cursor-default select-none"
             >
-              <div className="hexagon-inner bg-gradient-to-br from-teal-500 to-amber-400 dark:from-teal-600 dark:to-amber-500">
-                <div className="hexagon-content text-white">
-                  <div className="skill-icon mb-3">{skill.icon}</div>
-                  <div className="skill-name">{skill.name}</div>
-                </div>
-              </div>
+              <div className="icon text-teal-600 dark:text-teal-400 mb-4">{skill.icon}</div>
+              <div className="skill-name text-center font-semibold text-gray-800 dark:text-gray-200">{skill.name}</div>
             </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Skill Level Indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-block px-6 py-3 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 italic">
-            "Always learning and expanding my skillset to stay at the forefront of technology."
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
-  )
+      ))}
+    </motion.div>
+  </motion.div>
+</section>
+)
 }
