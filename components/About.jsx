@@ -119,7 +119,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-teal-600 dark:bg-teal-400 rounded-full mr-2"></div>
                   <span className="font-medium text-gray-900 dark:text-white">Availability:</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 pl-4">Happy to freelance/Internship/Exploration</p>
+                <p className="text-gray-700 dark:text-gray-300 pl-4">Happy for freelance/Internship/Exploration</p>
               </div>
             </div>
 
