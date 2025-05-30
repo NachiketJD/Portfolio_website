@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react"
-import emailjs from "emailjs-com";
+import emailjs from "emailjs-com"
 
 export default function Contact() {
   const ref = useRef(null)
@@ -25,42 +25,69 @@ export default function Contact() {
   }
 
   const handleSubmit = async (e) => {
-   e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault()
+    setIsSubmitting(true)
 
-  const SERVICE_ID = "your_service_id";
-  const TEMPLATE_ID = "your_template_id";
-  const PUBLIC_KEY = "your_public_key"; // usually starts with "user_"
+    // EmailJS Configuration
+    const SERVICE_ID = "your_service_id" // Replace with your EmailJS service ID
+    const TEMPLATE_ID_TO_YOU = "template_to_owner" // Template for emails sent to you
+    const TEMPLATE_ID_TO_SENDER = "template_to_sender" // Template for confirmation emails
+    const PUBLIC_KEY = "your_public_key" // Replace with your EmailJS public key
 
-  try {
-    const result = await emailjs.send(
-      SERVICE_ID,
-      TEMPLATE_ID,
-      {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-      },
-      PUBLIC_KEY
-    );
+    try {
+      // Email 1: Send the inquiry to you (portfolio owner)
+      const emailToOwner = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID_TO_YOU,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: "nachiket.j.deshpande@gmail.com", // Your email
+          reply_to: formData.email,
+        },
+        PUBLIC_KEY,
+      )
 
-    setSubmitStatus({
-      success: true,
-      message: "Your message has been sent successfully!",
-    });
-    setFormData({ name: "", email: "", subject: "", message: "" });
+      // Email 2: Send confirmation to the person who submitted the form
+      const emailToSender = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID_TO_SENDER,
+        {
+          to_name: formData.name,
+          to_email: formData.email,
+          from_name: "Nachiket Deshpande", // Your name
+          subject: `Thank you for reaching out, ${formData.name}!`,
+          original_subject: formData.subject,
+          reply_message: `Hi ${formData.name},\n\nThank you for reaching out! I have received your message regarding "${formData.subject}" and will get back to you as soon as possible.\n\nBest regards,\nNachiket Deshpande`,
+        },
+        PUBLIC_KEY,
+      )
 
-    // Reset status after 5 seconds
-    setTimeout(() => setSubmitStatus(null), 5000);
-  } catch (error) {
-    setSubmitStatus({
-      success: false,
-      message: "There was an error sending your message. Please try again.",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
+      console.log("Email to owner sent:", emailToOwner.status)
+      console.log("Confirmation email sent:", emailToSender.status)
+
+      setSubmitStatus({
+        success: true,
+        message: "Your message has been sent successfully! You'll receive a confirmation email shortly.",
+      })
+      setFormData({ name: "", email: "", subject: "", message: "" })
+
+      // Reset status after 7 seconds
+      setTimeout(() => setSubmitStatus(null), 7000)
+    } catch (error) {
+      console.error("EmailJS Error:", error)
+      setSubmitStatus({
+        success: false,
+        message: "There was an error sending your message. Please try again or contact me directly.",
+      })
+
+      // Reset error status after 7 seconds
+      setTimeout(() => setSubmitStatus(null), 7000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const containerVariants = {
@@ -101,7 +128,8 @@ export default function Contact() {
           </h2>
           <div className="w-20 h-1 bg-teal-600 dark:bg-teal-400 rounded-full mb-10"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl">
-            Have a question or want to work together? Feel free to contact me!
+            Have a question or want to work together? Feel free to contact me! You'll receive a confirmation email after
+            submitting.
           </p>
         </motion.div>
 
@@ -143,10 +171,10 @@ export default function Contact() {
                   <div>
                     <h4 className="font-medium text-gray-800 dark:text-white">Phone</h4>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+917620567372"
                       className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                     >
-                      7620567372
+                      +91 7620567372
                     </a>
                   </div>
                 </div>
@@ -166,7 +194,9 @@ export default function Contact() {
                 <h4 className="font-medium text-gray-800 dark:text-white mb-4">Connect with me</h4>
                 <div className="flex space-x-4">
                   <a
-                    href="#"
+                    href="https://linkedin.com/in/nachiket-deshpande"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-gray-200 dark:bg-gray-700 p-3 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
                     aria-label="LinkedIn"
                   >
@@ -181,8 +211,8 @@ export default function Contact() {
                   </a>
                   <a
                     href="https://github.com/NachiketJD"
-                    target="_blank" 
-                     rel="noopener noreferrer"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-gray-200 dark:bg-gray-700 p-3 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
                     aria-label="GitHub"
                   >
@@ -200,7 +230,9 @@ export default function Contact() {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://twitter.com/nachiket_jd"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-gray-200 dark:bg-gray-700 p-3 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
                     aria-label="Twitter"
                   >
@@ -225,7 +257,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Name
+                    Your Name *
                   </label>
                   <input
                     type="text"
@@ -234,13 +266,14 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    placeholder="Enter your full name"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Email
+                    Your Email *
                   </label>
                   <input
                     type="email"
@@ -249,13 +282,14 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    placeholder="Enter your email address"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Subject
+                    Subject *
                   </label>
                   <input
                     type="text"
@@ -264,13 +298,14 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    placeholder="What's this about?"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Message
+                    Message *
                   </label>
                   <textarea
                     id="message"
@@ -279,20 +314,42 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+                    placeholder="Tell me about your project or inquiry..."
                   ></textarea>
                 </div>
 
                 {submitStatus && (
-                  <div
-                    className={`p-4 rounded-lg ${
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-4 rounded-lg border ${
                       submitStatus.success
-                        ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                        : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                        ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800"
+                        : "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800"
                     }`}
                   >
-                    {submitStatus.message}
-                  </div>
+                    <div className="flex items-center">
+                      {submitStatus.success ? (
+                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                      {submitStatus.message}
+                    </div>
+                  </motion.div>
                 )}
 
                 <motion.button
@@ -305,7 +362,29 @@ export default function Contact() {
                   }`}
                 >
                   {isSubmitting ? (
-                    "Sending..."
+                    <>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Sending...
+                    </>
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" /> Send Message
