@@ -53,8 +53,11 @@ export default function About() {
               <div className="aspect-square rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center shadow-xl">
                 {/* Placeholder for your photo */}
                 <div className="text-gray-500 dark:text-gray-400 text-center p-8">
-                  <div className="text-6xl mb-4">📷</div>
-                  <p>Your photo will be placed here</p>
+                  <img 
+          src="/path-to-your-photo.jpg" 
+          alt="Your Photo" 
+          className="object-cover w-full h-full" 
+        />
                 </div>
               </div>
 
