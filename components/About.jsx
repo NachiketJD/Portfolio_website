@@ -53,11 +53,12 @@ export default function About() {
               <div className="aspect-square rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center shadow-xl">
                 {/* Placeholder for your photo */}
                 <div className="text-gray-500 dark:text-gray-400 text-center p-8">
-                  <img 
-          src="/path-to-your-photo.jpg" 
-          alt="Your Photo" 
-          className="object-cover w-full h-full" 
-        />
+                 <img 
+  src="public\Photo.jpeg" 
+  alt="Nachiket Jayant Deshpande" 
+  className="object-cover w-full h-full" 
+/>
+
                 </div>
               </div>
 
