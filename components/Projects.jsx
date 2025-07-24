@@ -10,15 +10,7 @@ export default function Projects() {
   const isInView = useInView(ref, { once: true, amount: 0.1 })
 
   const projects = [
-    {
-      title: "Gen AI smart Assistant",
-      description:
-        "A full-featured online store with product listings, cart functionality, and secure checkout process.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["React", "Node.js", "MongoDB", "Stripe"],
-      liveLink: "#",
-      githubLink: "#",
-    },
+    
     {
       title: "Deshpande DNS",
       description: "A productivity application that helps users organize tasks, set deadlines, and track progress.",
@@ -34,7 +26,16 @@ export default function Projects() {
   tags: ["C++", "Multithreading", "Security"],
   liveLink: "#",
   githubLink: "https://github.com/NachiketJD/Parallel_Encrypt_Decrypt",
-}
+},
+{
+      title: "Gen AI smart Assistant",
+      description:
+        "A full-featured online store with product listings, cart functionality, and secure checkout process.",
+      image: "/placeholder.svg?height=400&width=600",
+      tags: ["React", "Node.js", "MongoDB", "Stripe"],
+      liveLink: "#",
+      githubLink: "#",
+    }
 
   ]
 

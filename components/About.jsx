@@ -71,10 +71,6 @@ export default function About() {
               transition={{ delay: 0.6, duration: 0.5 }}
               className="absolute bottom-8 -right-8 md:right-0 px-6 py-4 bg-white dark:bg-gray-800 rounded-xl shadow-xl z-20"
             >
-              <div className="text-center">
-                <div className="text-2xl font-bold text-teal-600 dark:text-teal-400">2+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
-              </div>
             </motion.div>
           </motion.div>
 

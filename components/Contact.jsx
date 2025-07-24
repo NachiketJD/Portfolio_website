@@ -1,23 +1,20 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react"
+import { Send } from "lucide-react"
 import emailjs from "emailjs-com"
 
 export default function Contact() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+
+  const SERVICE_ID = "service_p0uv6pd" // <-- Replace with yours
+  const TEMPLATE_ID_TO_OWNER = "template_vsav56o"
+  const TEMPLATE_ID_TO_SENDER = "template_qqz1g0q"
+  const PUBLIC_KEY = "RroT2IU_g4UboWnv_"
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -28,374 +25,124 @@ export default function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // EmailJS Configuration
-    const SERVICE_ID = "your_service_id" // Replace with your EmailJS service ID
-    const TEMPLATE_ID_TO_YOU = "template_to_owner" // Template for emails sent to you
-    const TEMPLATE_ID_TO_SENDER = "template_to_sender" // Template for confirmation emails
-    const PUBLIC_KEY = "your_public_key" // Replace with your EmailJS public key
-
     try {
-      // Email 1: Send the inquiry to you (portfolio owner)
-      const emailToOwner = await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID_TO_YOU,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_email: "nachiket.j.deshpande@gmail.com", // Your email
-          reply_to: formData.email,
-        },
-        PUBLIC_KEY,
-      )
-
-      // Email 2: Send confirmation to the person who submitted the form
-      const emailToSender = await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID_TO_SENDER,
-        {
-          to_name: formData.name,
-          to_email: formData.email,
-          from_name: "Nachiket Deshpande", // Your name
-          subject: `Thank you for reaching out, ${formData.name}!`,
-          original_subject: formData.subject,
-          reply_message: `Hi ${formData.name},\n\nThank you for reaching out! I have received your message regarding "${formData.subject}" and will get back to you as soon as possible.\n\nBest regards,\nNachiket Deshpande`,
-        },
-        PUBLIC_KEY,
-      )
-
-      console.log("Email to owner sent:", emailToOwner.status)
-      console.log("Confirmation email sent:", emailToSender.status)
-
-      setSubmitStatus({
-        success: true,
-        message: "Your message has been sent successfully! You'll receive a confirmation email shortly.",
-      })
-      setFormData({ name: "", email: "", subject: "", message: "" })
-
-      // Reset status after 7 seconds
-      setTimeout(() => setSubmitStatus(null), 7000)
-    } catch (error) {
-      console.error("EmailJS Error:", error)
-      setSubmitStatus({
-        success: false,
-        message: "There was an error sending your message. Please try again or contact me directly.",
-      })
-
-      // Reset error status after 7 seconds
-      setTimeout(() => setSubmitStatus(null), 7000)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
+  const resultToOwner = await emailjs.send(
+    SERVICE_ID,
+    TEMPLATE_ID_TO_OWNER,
+    {
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
     },
-  }
+    PUBLIC_KEY
+  )
+  console.log("Owner Email Result:", resultToOwner)
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
+  const resultToSender = await emailjs.send(
+    SERVICE_ID,
+    TEMPLATE_ID_TO_SENDER,
+    {
+      to_name: formData.name,
+      to_email: formData.email,
+      from_name: "Nachiket Deshpande",
+      original_subject: formData.subject,
     },
+    PUBLIC_KEY
+  )
+  console.log("Sender Email Result:", resultToSender)
+
+  // Only show success if both succeeded
+  if (resultToOwner.status === 200 && resultToSender.status === 200) {
+    setSubmitStatus({
+      success: true,
+      message: "Message sent successfully! You'll get a confirmation email shortly.",
+    })
+    setFormData({ name: "", email: "", subject: "", message: "" })
+  } else {
+    throw new Error("Unexpected response from EmailJS")
+  }
+} catch (err) {
+  console.error("EmailJS Error:", err)
+  setSubmitStatus({
+    success: false,
+    message: "Something went wrong. Please try again later or email me directly.",
+  })
+} finally {
+  setIsSubmitting(false)
+  setTimeout(() => setSubmitStatus(null), 7000)
+}
+
   }
 
   return (
-    <section id="contact" className="py-24">
-      <motion.div
-        ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="relative"
-      >
-        <div className="absolute -top-10 left-0 text-9xl font-bold text-gray-100 dark:text-gray-800 select-none">
-          CONTACT
-        </div>
+    <section id="contact" className="py-20">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Contact Me</h2>
 
-        <motion.div variants={itemVariants} className="relative z-10 mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 inline-block">
-            Get In <span className="text-teal-600 dark:text-teal-400">Touch</span>
-          </h2>
-          <div className="w-20 h-1 bg-teal-600 dark:bg-teal-400 rounded-full mb-10"></div>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl">
-            Have a question or want to work together? Feel free to contact me! You'll receive a confirmation email after
-            submitting.
-          </p>
-        </motion.div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            required
+            className="w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            required
+            className="w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+          <input
+            type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            placeholder="Subject"
+            required
+            className="w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Your Message"
+            required
+            rows={5}
+            className="w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
+          ></textarea>
 
-        <div className="grid md:grid-cols-12 gap-12">
-          <motion.div variants={itemVariants} className="md:col-span-5 space-y-8">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full mr-4">
-                  <MessageSquare className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Let's Talk</h3>
-              </div>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            disabled={isSubmitting}
+            className={`w-full px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md transition-all ${
+              isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+            }`}
+          >
+            {isSubmitting ? "Sending..." : <><Send className="inline-block mr-2" />Send Message</>}
+          </motion.button>
 
-              <p className="text-gray-600 dark:text-gray-400 mb-8">
-                Feel free to reach out to me through any of these channels. I'm always open to discussing new projects,
-                creative ideas, or opportunities to be part of your vision.
-              </p>
-
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="bg-teal-100 dark:bg-teal-900/30 p-3 rounded-full mr-4">
-                    <Mail className="w-5 h-5 text-teal-600 dark:text-teal-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 dark:text-white">Email</h4>
-                    <a
-                      href="mailto:nachiket.j.deshpande@gmail.com"
-                      className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-                    >
-                      nachiket.j.deshpande@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
-                    <Phone className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 dark:text-white">Phone</h4>
-                    <a
-                      href="tel:+917620567372"
-                      className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-                    >
-                      +91 7620567372
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
-                    <MapPin className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-800 dark:text-white">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Nagpur, India</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-8 border-t border-gray-200 dark:border-gray-700 mt-8">
-                <h4 className="font-medium text-gray-800 dark:text-white mb-4">Connect with me</h4>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://linkedin.com/in/nachiket-deshpande"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-gray-200 dark:bg-gray-700 p-3 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
-                    aria-label="LinkedIn"
-                  >
-                    <svg
-                      className="w-5 h-5 text-gray-700 dark:text-gray-300"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://github.com/NachiketJD"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-gray-200 dark:bg-gray-700 p-3 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
-                    aria-label="GitHub"
-                  >
-                    <svg
-                      className="w-5 h-5 text-gray-700 dark:text-gray-300"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://twitter.com/nachiket_jd"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-gray-200 dark:bg-gray-700 p-3 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
-                    aria-label="Twitter"
-                  >
-                    <svg
-                      className="w-5 h-5 text-gray-700 dark:text-gray-300"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="md:col-span-7">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Send Me a Message</h3>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                    placeholder="Enter your email address"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Subject *
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                    placeholder="What's this about?"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
-                    placeholder="Tell me about your project or inquiry..."
-                  ></textarea>
-                </div>
-
-                {submitStatus && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`p-4 rounded-lg border ${
-                      submitStatus.success
-                        ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800"
-                        : "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800"
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      {submitStatus.success ? (
-                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      ) : (
-                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                          <path
-                            fillRule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
-                      {submitStatus.message}
-                    </div>
-                  </motion.div>
-                )}
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full px-6 py-3 bg-gradient-to-r from-teal-600 to-amber-500 hover:from-teal-700 hover:to-amber-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center ${
-                    isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg
-                        className="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 mr-2" /> Send Message
-                    </>
-                  )}
-                </motion.button>
-              </form>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
+          {submitStatus && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`mt-4 p-4 text-sm rounded-md ${
+                submitStatus.success ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+              }`}
+            >
+              {submitStatus.message}
+            </motion.div>
+          )}
+        </form>
+      </div>
     </section>
   )
 }
