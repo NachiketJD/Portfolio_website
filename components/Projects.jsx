@@ -28,13 +28,14 @@ export default function Projects() {
       githubLink: "#",
     },
     {
-      title: "Weather Dashboard",
-      description: "Real-time weather information app with location-based forecasts and interactive maps.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["React", "Weather API", "Chart.js"],
-      liveLink: "#",
-      githubLink: "#",
-    },
+  title: "Parallel Encrypt/Decrypt",
+  description: "A multithreaded file encryption and decryption tool using parallel computing for enhanced speed and efficiency.",
+  image: "/placeholder.svg?height=400&width=600",
+  tags: ["C++", "Multithreading", "Security"],
+  liveLink: "#",
+  githubLink: "https://github.com/NachiketJD/Parallel_Encrypt_Decrypt",
+}
+
   ]
 
   const containerVariants = {

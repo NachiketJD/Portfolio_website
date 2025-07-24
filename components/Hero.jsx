@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
+import Image from "next/image"
 
 export default function Hero() {
   return (
@@ -69,7 +70,7 @@ export default function Hero() {
             >
               Hi, I'm{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-amber-500 dark:from-teal-400 dark:to-amber-400">
-                Nachiket Jayant Deshpande
+                Nachiket
               </span>
             </motion.h1>
 
@@ -114,12 +115,14 @@ export default function Hero() {
             className="relative w-full max-w-md aspect-square"
           >
             <div className="w-full h-full rounded-full bg-gradient-to-br from-purple-500 to-blue-500 dark:from-purple-600 dark:to-blue-600 p-1 shadow-xl">
-              <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800 flex items-center justify-center">
-                {/* Placeholder for your photo */}
-                <div className="text-gray-500 dark:text-gray-400 text-center p-8">
-                  <div className="text-6xl mb-4">📷</div>
-                  {/* <p>Your photo will be placed here</p> */}
-                </div>
+              <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800 relative">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Nachiket-t4yHvszkkPTzetTnIQKlAdTdLUrD0G.jpeg"
+                  alt="Nachiket Jayant Deshpande - Software Developer"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
             </div>
 

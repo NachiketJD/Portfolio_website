@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import Image from "next/image"
 
 export default function About() {
   const ref = useRef(null)
@@ -50,16 +51,13 @@ export default function About() {
         <div className="grid md:grid-cols-12 gap-12 items-center">
           <motion.div variants={itemVariants} className="md:col-span-5 relative">
             <div className="relative z-10">
-              <div className="aspect-square rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center shadow-xl">
-                {/* Placeholder for your photo */}
-                <div className="text-gray-500 dark:text-gray-400 text-center p-8">
-                 <img 
-  src="public\Photo.jpeg" 
-  alt="Nachiket Jayant Deshpande" 
-  className="object-cover w-full h-full" 
-/>
-
-                </div>
+              <div className="aspect-square rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-800 shadow-xl relative">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Nachiket-t4yHvszkkPTzetTnIQKlAdTdLUrD0G.jpeg"
+                  alt="Nachiket Jayant Deshpande - About Photo"
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {/* Decorative elements */}
@@ -74,8 +72,8 @@ export default function About() {
               className="absolute bottom-8 -right-8 md:right-0 px-6 py-4 bg-white dark:bg-gray-800 rounded-xl shadow-xl z-20"
             >
               <div className="text-center">
-                {/* <div className="text-2xl font-bold text-teal-600 dark:text-teal-400">5+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div> */}
+                <div className="text-2xl font-bold text-teal-600 dark:text-teal-400">2+</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
               </div>
             </motion.div>
           </motion.div>
@@ -90,7 +88,8 @@ export default function About() {
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               I specialize in front-end development with React, but I'm also comfortable working across the full stack.
               I believe in writing clean, maintainable code and creating intuitive interfaces that users love to
-              interact with. I am also interested in Computer Networks, SRE, Network Engineering and Technical Consulting Engineering roles.
+              interact with. I am also interested in Computer Networks, SRE, Network Engineering and Technical
+              Consulting Engineering roles.
             </p>
 
             <div className="grid grid-cols-2 gap-4 my-8">
@@ -107,7 +106,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-teal-600 dark:bg-teal-400 rounded-full mr-2"></div>
                   <span className="font-medium text-gray-900 dark:text-white">Email:</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 pl-4">nachiet.j.deshpande@gmail.com</p>
+                <p className="text-gray-700 dark:text-gray-300 pl-4">nachiket.j.deshpande@gmail.com</p>
               </div>
 
               <div className="space-y-1">
@@ -115,7 +114,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-teal-600 dark:bg-teal-400 rounded-full mr-2"></div>
                   <span className="font-medium text-gray-900 dark:text-white">Location:</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 pl-4">Nagpur</p>
+                <p className="text-gray-700 dark:text-gray-300 pl-4">Nagpur, India</p>
               </div>
 
               <div className="space-y-1">
