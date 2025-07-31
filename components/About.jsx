@@ -82,10 +82,15 @@ export default function About() {
               problem-solving.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-              I specialize in front-end development with React, but I'm also comfortable working across the full stack.
-              I believe in writing clean, maintainable code and creating intuitive interfaces that users love to
-              interact with. I am also interested in Computer Networks, SRE, Network Engineering and Technical
-              Consulting Engineering roles.
+              Final year Information technology student with a strong interest in Systems Reliability Engineering. Proficient in C / C++, Python, Linux, shell scripting, Golang, and AWS with hands-on experience building
+tools such as custom DNS resolvers and customized packet sniffer. Worked with ARP, Ethernet,
+OSPF, BGP, RIP, FTP, IMAP, ICMP, DHCP etc. Well-rounded in OS concepts, cloud computing,
+data structures, object-oriented design, computer networks, processes, virtual memory, TCP/IP,
+Routing algorithms and network protocols. Skilled in using Cisco Packet Tracer and Wireshark for
+simulating and troubleshooting complex topologies, handling Root Cause Analysis. Hands on with Containerization and Cloud Infrastrcture maintenance Docker. Active student member at ACM. Passionate about
+Virtualization, Hyperconverged Infrastructure with strong verbal and written communication skills, frequently writing blogs of Virtualization, Cloud and Networks on Medium.
+
+
             </p>
 
             <div className="grid grid-cols-2 gap-4 my-8">
